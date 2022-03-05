@@ -35,10 +35,10 @@ $app->get('/db/', function() use($app) {
     $app['monolog']->addDebug('Row ' . $row['name']);
     $names[] = $row;
   }
-
-  return $app['twig']->render('database.twig', array(
-    'names' => $names
-  ));
+return "Hello Word";
+ // return $app['twig']->render('database.twig', array(
+  //  'names' => $names
+  //));
 });
 
 $app->run();
