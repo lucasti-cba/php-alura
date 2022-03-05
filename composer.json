@@ -6,6 +6,7 @@
     "symfony/twig-bridge": "^3"
   },
   "require-dev": {
-    "heroku/heroku-buildpack-php": "*"
+    "heroku/heroku-buildpack-php": "*",
+    "csanquer/pdo-service-provider": "^1.1dev"
   }
 }

@@ -11,9 +11,19 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 ));
 
 // Register view rendering
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/views',
-));
+$dbopts = parse_url(getenv('DATABASE_URL'));
+$app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
+               array(
+                'pdo.server' => array(
+                   'driver'   => 'pgsql',
+                   'user' => $dbopts["user"],
+                   'password' => $dbopts["pass"],
+                   'host' => $dbopts["host"],
+                   'port' => $dbopts["port"],
+                   'dbname' => ltrim($dbopts["path"],'/')
+                   )
+               )
+);
 
 // Our web handlers
 
