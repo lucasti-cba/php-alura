@@ -1,8 +1,8 @@
 {
   "require": {
-    "silex/silex": "^2.0.4",
+    "silex/silex": "^1.0.4",
     "monolog/monolog": "^1.22",
-    "twig/twig": "^2.0",
+    "twig/twig": "^1.22",
     "symfony/twig-bridge": "^3"
   },
   "require-dev": {
