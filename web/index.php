@@ -1,20 +1,11 @@
 <?php
 
-require('../vendor/autoload.php');
+require_once __DIR__.'/../vendor/autoload.php';
 
-$app = new Silex\Application();
-$app['debug'] = true;
+use Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider;
+use Silex\Application;
 
-$app->get('/', function() use($app) {
-  $app['monolog']->addDebug('logging output.');
-  return str_repeat('Hello', getenv('TIMES'));
-});
-
-// Register the monolog logging service
-$app->register(new Silex\Provider\MonologServiceProvider(), array(
-  'monolog.logfile' => 'php://stderr',
-));
-
+$app = new Application();
 $dbopts = parse_url(getenv('DATABASE_URL'));
 $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider('pdo'),
                array(
@@ -28,7 +19,6 @@ $app->register(new Csanquer\Silex\PdoServiceProvider\Provider\PDOServiceProvider
                    )
                )
 );
-
 
 $app->get('/db/', function() use($app) {
   $st = $app['pdo']->prepare('SELECT name FROM test_table');
@@ -44,6 +34,5 @@ $app->get('/db/', function() use($app) {
     'names' => $names
   ));
 });
-
-$app->run();
-
+// get PDO connection
+$pdo = $app['pdo'];
