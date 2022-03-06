@@ -3,4 +3,8 @@
 require('../vendor/autoload.php');
 
 
-echo "Hello Word";
+$app['debug'] = true;
+
+$app['twig']->render('index.twig');
+
+$app->run();
